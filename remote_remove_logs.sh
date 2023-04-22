@@ -40,7 +40,6 @@ read -s $sudo_password
 
 ssh $SSH_CONNECT "echo "$sudo_password" | sudo -S -- find $REMOTE_LOG_DIR -name '*.gz' -print0 | tar -cvjf $backup_file  --null --files-from -"
 scp $SSH_CONNECT:$backup_file .
-ssh $SSH_CONNECT "echo "$sudo_password" | sudo -S -- find $REMOTE_LOG_DIR -name '*.gz' -exec rm '{}' \;"
-ssh $SSH_CONNECT "echo "$sudo_password" | sudo -S -- rm $backup_file"
+ssh $SSH_CONNECT "echo "$sudo_password" | sudo -S -- find $REMOTE_LOG_DIR -name '*.gz' -exec rm '{}' \; && rm $backup_file"
 
 
